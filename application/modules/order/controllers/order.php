@@ -1,5 +1,5 @@
 <?php
-class Order extends MX_Controller 
+class Order extends MY_Controller 
 {
 
 function __construct() {
@@ -20,15 +20,22 @@ public function create_order(){
 
   $this->load->model('vaccines/mdl_vaccines');
   $data['vaccines']= $this->mdl_vaccines->getVaccine();
+  $data['section'] = "Vaccines";
+  $data['subtitle'] = "Place Order";
+  $data['page_title'] = "Place Order";
  	$data['module'] = "order";
    $data['options']="none";
 	$data['view_file'] = "create_order_form";
 
-	echo Modules::run('template/admin', $data);
+	/*echo Modules::run('template/admin', $data);*/
+  $this->template($data);
 }
 public function list_orders(){
   $this->load->model('order/mdl_order');
   $data['orders']= $this->mdl_order->get_orders();
+  $data['section'] = "Vaccines";
+  $data['subtitle'] = "Orders";
+  $data['page_title'] = " Orders";
   $data['module'] = "order";
   $data['view_file'] = "list_order_view";
   echo Modules::run('template/admin', $data);
@@ -49,7 +56,9 @@ if (!empty($content_array)) {
   $orderitems=$content_array;
   $data['orderitems']=$orderitems['orderitems'];
 }
-
+  $data['section'] = "Vaccines";
+  $data['subtitle'] = "Orders";
+  $data['page_title'] = " Order";
   $data['module'] = "order";
   $data['options']="view";
   $data['view_file'] = "create_order_form";

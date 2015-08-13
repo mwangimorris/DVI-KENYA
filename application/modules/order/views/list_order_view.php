@@ -1,16 +1,9 @@
 <form id="list_orders_fm">
-        <div>
-            <ol class="breadcrumb">
-              <li><a href="#">Vaccines</a></li><span class="divider">/</span>
-              <li class="active"><a href="#"></a></li><span class="divider">/</span>
-            </ol>
-          </div>
-         <div>
    <a href='<?php echo site_url('order/create_order');?>' class='btn btn-info state_change' id="create_order" value="Create Order">Create Order</a>
    <hr></hr> <hr></hr>
 
 <!--Listing Placed Orders-->
-      <div><h3>Placed Orders</h3></div>
+      <div><h5 class="bg-info">Placed Orders</h5></div>
       <hr></hr>
 
     <table class="table" id="list_orders_tbl">
@@ -35,7 +28,7 @@
 
 <!--Listing Rejected Orders-->
       <hr></hr>
-      <div><h3>Rejected Orders</h3></div>
+      <div><h5 class="bg-info">Rejected Orders</h5></div>
       <hr></hr>
 
   <table class="table" id="list_rejected_orders_tbl">

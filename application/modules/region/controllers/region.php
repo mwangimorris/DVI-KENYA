@@ -37,6 +37,9 @@ public function index()
            //$this->load->view('display', $data);
             $data['module']="region";
             $data['view_file']="list_region_view";
+            $data['section'] = "Configuration";
+            $data['subtitle'] = "List Regions";
+            $data['page_title'] = "Regions";
             echo Modules::run('template/admin', $data);  
 	}
    
@@ -59,9 +62,12 @@ function create(){
             $data= $this->get_data_from_post();
             }
             
-
+    
 	$data['module'] = "region";
 	$data['view_file'] = "create_region_form";
+  $data['section'] = "Configuration";
+  $data['subtitle'] = "Add Region";
+  $data['page_title'] = "Regions";
 	echo Modules::run('template/admin', $data);
 }
 

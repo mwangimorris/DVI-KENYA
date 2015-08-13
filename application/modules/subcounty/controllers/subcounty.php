@@ -34,6 +34,9 @@ public function index()
           // $data['query'] = $this->mdl_subcounty->get('id', $config['per_page'], $this->uri->segment(3));
             $data['records'] = $this->db->get('m_subcounty', $config['per_page'], $this->uri->segment(3));
            //$this->load->view('display', $data);
+            $data['section'] = "Configuration";
+            $data['subtitle'] = "Sub County";
+            $data['page_title'] = "List Sub Counties";
             $data['module']="subcounty";
             $data['view_file']="list_subcounty_view";
             echo Modules::run('template/admin', $data);  
@@ -58,7 +61,9 @@ function create(){
             $data= $this->get_data_from_post();
             }
             
-
+            $data['section'] = "Configuration";
+            $data['subtitle'] = "Sub County";
+            $data['page_title'] = "Add Sub County";
 	$data['module'] = "subcounty";
 	$data['view_file'] = "create_subcounty_form";
 	echo Modules::run('template/admin', $data);

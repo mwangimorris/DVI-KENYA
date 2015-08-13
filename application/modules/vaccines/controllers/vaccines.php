@@ -36,6 +36,9 @@ public function index()
            //$this->load->view('display', $data);
             $data['module']="vaccines";
             $data['view_file']="list_vaccines_view";
+            $data['section'] = "Configuration";
+          $data['subtitle'] = "List Vaccines";
+          $data['page_title'] = "Vaccines";
             echo Modules::run('template/admin', $data);  
 	}
    
@@ -62,10 +65,13 @@ function create(){
             $data= $this->get_data_from_post();
             $data['mavaccine']  = $this->mdl_vaccines->getVaccine();
             }
-            
-
-	$data['module'] = "vaccines";
-	$data['view_file'] = "create_vaccines_form";
+          
+          $data['module'] = "vaccines";
+          $data['view_file'] = "create_vaccines_form"; 
+          $data['section'] = "Configuration";
+          $data['subtitle'] = "Add Vaccine";
+          $data['page_title'] = "Vaccines";
+	        
 	echo Modules::run('template/admin', $data);
 }
             

@@ -34,6 +34,9 @@ public function index()
           // $data['query'] = $this->mdl_county->get('id', $config['per_page'], $this->uri->segment(3));
             $data['records'] = $this->db->get('m_county', $config['per_page'], $this->uri->segment(3));
            //$this->load->view('display', $data);
+            $data['section'] = "Configuration";
+            $data['subtitle'] = "County";
+            $data['page_title'] = "List Counties";
             $data['module']="county";
             $data['view_file']="list_county_view";
             echo Modules::run('template/admin', $data);  
@@ -63,7 +66,9 @@ function create(){
              $data['maregion']  = $this->mdl_county->getRegion();
             }
             
-
+            $data['section'] = "Configuration";
+            $data['subtitle'] = "County";
+            $data['page_title'] = "Add County";
 	$data['module'] = "county";
 	$data['view_file'] = "create_county_form";
 	echo Modules::run('template/admin', $data);

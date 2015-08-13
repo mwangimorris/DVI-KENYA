@@ -1,14 +1,7 @@
 <?php
 $form_attributes = array('id' => 'create_orderfm','method' =>'post');
 echo form_open('order/save_order',$form_attributes);?>
-       <!--Place bread crumb -->
-         <div>
-            <ol class="breadcrumb">
-                <li><a href="#">Vaccines</a></li><span class="divider">/</span>
-                <li class="active"><a href="#"></a></li><span class="divider">/</span>
-          </ol>
-          </div>
-                  
+                
                   <!--Place order form -->
    <div id="order_infor">
 

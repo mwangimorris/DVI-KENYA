@@ -1,12 +1,12 @@
 <?php
-$form_attributes = array('id' => 'stock_transactionfm','method' =>'post');
-echo form_open('stock/save_stock',$form_attributes);?>
-
+$form_attributes = array('id' => 'issuestock_fm','method' =>'post');
+echo form_open('',$form_attributes);?>
 <table>
 <p class="bg-info"> Transaction Details</p>
 	<thead>
-		                  <th style="width:26%;" class="small" align="center">Received From</th>
+		                  <th style="width:26%;" class="small" align="center">Issue To</th>
 							<th style="width:26%;" class="small">Date Issued</th>
+
 	</thead>
 	<tbody>
 		<tr>
@@ -15,18 +15,20 @@ echo form_open('stock/save_stock',$form_attributes);?>
 		</tr>
 	</tbody>
 </table>
+<table>
+	
+</table>
 <hr></hr><hr></hr>
-
-
-<div id="stock">
+<div id="stock_issue">
 	 <p class="bg-info"> Vaccine Details</p> 
 	<table class="table">
 		<thead>
 
-			              <th style="width:26%;" class="small" align="center">Vaccine</th>
+			                <th style="width:17%;" class="small" align="center">Vaccine</th>
 							<th style="width:12%;" class="small">Batch No.</th>
 							<th style="width:16%;" class="small">Expiry&nbsp;Date</th>
-							<th style="width:12%;" class="small">Quantity(doses)</th>
+							<th style="width:12%;" class="small">Amount Ordered</th>
+							<th style="width:16%;" class="small">Amount Issued</th>
 							<th style="width:16%;" class="small">VVM Status</th>
 							<th style="width:15%" class="small">Action</th>
 		</thead>
@@ -39,6 +41,7 @@ echo form_open('stock/save_stock',$form_attributes);?>
              		<td><?php $data=array('name' => '','id'=> '','class'=>'col-xs-12'); echo form_input($data);?></td>
              		<td><?php $data=array('name' => '','id'=> '','class'=>'col-xs-12'); echo form_input($data);?></td>
              		<td><?php $data=array('name' => '','id'=> '','class'=>'col-xs-12'); echo form_input($data);?></td>
+             		<td><?php $data=array('name' => '','id'=> '','class'=>'col-xs-12'); echo form_input($data);?></td>
              		<td class="col-xs-9 small "><a href="#"> Add </a><span class="divider"> | </span><a href="#">Remove</a></td>
 			</tr>
 
@@ -48,7 +51,7 @@ echo form_open('stock/save_stock',$form_attributes);?>
 
 </div>
 <?php
-$data=array('name' => 'stock_items','id'=> 'stock_items','value' => 'Submit');
+$data=array('name' => 'stock_issue','id'=> 'stock_issue','value' => 'Issue');
  echo form_submit($data);
    
    echo form_close();?>
