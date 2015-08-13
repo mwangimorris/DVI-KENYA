@@ -153,7 +153,7 @@ aria-hidden="true">&times;</span></button>
           <div class="block-web">
          <div class="header">
               <!--<div class="actions"> <a class="minimize" href="#"><i class="fa fa-chevron-down"></i></a><a class="close-down" href="#"><i class="fa fa-times"></i></a> </div>-->
-              <h3 class="content-header"><?php echo $page_title;?></h3>
+              <h3 class="content-header text-info "><?php echo $page_title;?></h3>
             </div>
             <div class="porlets-content">
         <?php 
