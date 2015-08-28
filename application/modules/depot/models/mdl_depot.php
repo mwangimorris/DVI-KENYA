@@ -16,6 +16,7 @@ function getRegion(){
 $query = $this->db->query("SELECT id, region_name FROM m_region");
 return $query->result();
 }
+
 function getCounty(){
 $query = $this->db->query("SELECT id, county_name FROM m_county");
 return $query->result();

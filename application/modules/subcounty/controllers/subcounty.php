@@ -76,9 +76,22 @@ function get_data_from_post(){
             $data['population_one']=$this->input->post('population_one', TRUE);
             $data['population_women']=$this->input->post('population_women', TRUE);
             $data['no_facilities']=$this->input->post('no_facilities', TRUE);
+			$data['subcounty_logistician']=$this->input->post('subcounty_logistician', TRUE);
+			$data['subcounty_logistician_phone']=$this->input->post('subcounty_logistician_phone', TRUE);
+			$data['subcounty_logistician_email']=$this->input->post('subcounty_logistician_email', TRUE);
+			$data['subcounty_nurse']=$this->input->post('subcounty_nurse', TRUE);
+			$data['subcounty_nurse_phone']=$this->input->post('subcounty_nurse_phone', TRUE);
+			$data['subcounty_logistician_email']=$this->input->post('subcounty_nurse_email', TRUE);
+			$data['medical_technician']=$this->input->post('medical_technician', TRUE);
+			$data['medical_technician_phone']=$this->input->post('medical_technician_phone', TRUE);
+			$data['medical_technician_email']=$this->input->post('medical_technician_email', TRUE);
+			$data['subcounty_medicalofficer']=$this->input->post('subcounty_medicalofficer', TRUE);
+			$data['subcounty_medicalofficer_phone']=$this->input->post('subcounty_medicalofficer_phone', TRUE);
+			$data['subcounty_medicalofficer_email']=$this->input->post('subcounty_medicalofficer_email', TRUE);
+			$data['no_facilities']=$this->input->post('no_facilities', TRUE);
             return $data;
         }
-
+			
         function get_data_from_db($update_id){
                $query = $this->get_where($update_id);
                foreach ($query->result() as $row){

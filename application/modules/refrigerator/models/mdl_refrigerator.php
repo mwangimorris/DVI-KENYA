@@ -1,14 +1,14 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Mdl_fridge extends CI_Model {
+class Mdl_refrigerator extends CI_Model {
 
 function __construct() {
 parent::__construct();
 }
 
 function get_table() {
-$table = "m_fridge";
+$table = "m_refrigerator";
 return $table;
 }
 

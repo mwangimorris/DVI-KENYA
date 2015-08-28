@@ -18,6 +18,18 @@
                                         <th>Estimated Population &lt; 1yr</th>
                                         <th>Estimated Women Population</th>
                                         <th>No. of Facilities</th>
+										<th>Sub-County EPI Logistician</th>
+										<th>Mobile Phone Number of EPI Logistician</th>
+										<th>Email Address of EPI Logistician</th>
+										<th>Sub-County Public Health Nurse</th>
+										<th>Mobile Phone Number</th>
+										<th>Email Address</th>
+										<th>Name of Medical Engineering Technician</th>
+										<th>Mobile Phone Number</th>
+										<th>Email Address</th>
+										<th>Name of Sub-County Medical Officer</th>
+										<th>Mobile Phone</th>
+										<th>Email Address</th>
                                         <td align="center"><b>Edit</b></td>
                                         <td align="center"><b>Delete</b></td>
                                     </tr>
@@ -34,6 +46,18 @@
                                         <td><?php echo $row->population_one ?></td>
                                         <td><?php echo $row->population_women ?></td>
                                         <td><?php echo $row->no_facilities ?></td>
+										<td><?php echo $row->subcounty_logistician ?></td>
+										<td><?php echo $row->subcounty_logistician_phone ?></td>
+										<td><?php echo $row->subcounty_logistician_email ?></td>
+										<td><?php echo $row->subcounty_nurse ?></td>
+										<td><?php echo $row->subcounty_nurse_phone ?></td>
+										<td><?php echo $row->subcounty_nurse_email ?></td>
+										<td><?php echo $row->medical_technician ?></td>
+										<td><?php echo $row->medical_technician_phone ?></td>
+										<td><?php echo $row->medical_technician_email ?></td>
+										<td><?php echo $row->subcounty_medicalofficer ?></td>
+										<td><?php echo $row->subcounty_medicalofficer_phone ?></td>
+										<td><?php echo $row->subcounty_medicalofficer_email ?></td>
                                         <td align="center"><a href="<?php echo $edit_url ?>"><i class="fa fa-edit"></i></a></td>
                                         <td align="center"><a href="<?php echo $delete_url ?>"><i class="fa fa-trash-o"></i></td>
                                        

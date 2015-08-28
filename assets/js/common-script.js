@@ -194,7 +194,7 @@ jQuery(window).load(function() {
    jQuery('.popovers').popover();
    
    // Form Toggles
-   $('.toggle').toggles({on: true});
+   $('.toggle').toggles({on: false});
    
    $('.toggle-chat1').toggles({on: false});
 

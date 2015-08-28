@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
   <div class="row">
     <div class="col-lg-12">
-      <a href="<?php echo site_url('fridge/create');?>" class="btn btn-primary">Add Fridge</a>
+      <a href="<?php echo site_url('refrigerator/create');?>" class="btn btn-primary">Add refrigerator</a>
     </div>
   </div>
   <div class="row">
@@ -13,11 +13,11 @@
   <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Item Type</th>
-                                        <th>Model Name</th>
-                                        <th>Manufacturer</th>
-                                        <th>Freezing Capacity</th>
-										
+                                        <th>Make &amp; Model</th>
+                                        <th>Temperature Monitoring Device No</th>
+                                        <th>Main Power Source</th>
+                                        <th>Backup Power Source</th>
+										                    <th>Age of Refrigerator (Yrs)</th>
                                         <td align="center"><b>Edit</b></td>
                                         <td align="center"><b>Delete</b></td>
                                     </tr>
@@ -25,14 +25,15 @@
                                 <tbody>
                                     <?php
                                     foreach ($records->result() as $row){
-                                        $edit_url = base_url().'fridge/create/'.$row->id;
-                                        $delete_url = base_url().'fridge/delete/'.$row->id;
+                                        $edit_url = base_url().'refrigerator/create/'.$row->id;
+                                        $delete_url = base_url().'refrigerator/delete/'.$row->id;
                                       ?>
                                     <tr>
-                                        <td><?php echo $row->item_type ?></td>
-                                        <td><?php echo $row->model_name ?></td>
-                                        <td><?php echo $row->manufacturer ?></td>
-                                        <td><?php echo $row->freezing_capacity ?></td>
+                                        <td><?php echo $row->make_model ?></td>
+                                        <td><?php echo $row->temp_monitor_no ?></td>
+                                        <td><?php echo $row->main_power_source ?></td>
+                                        <td><?php echo $row->backup_power_source ?></td>
+                                        <td><?php echo $row->refrigerator_age ?></td>
                                         <td align="center"><a href="<?php echo $edit_url ?>"><i class="fa fa-edit"></i></a></td>
                                         <td align="center"><a href="<?php echo $delete_url ?>"><i class="fa fa-trash-o"></i></td>
                                        

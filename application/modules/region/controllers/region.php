@@ -73,7 +73,10 @@ function create(){
 
 function get_data_from_post(){
             $data['region_name']=$this->input->post('region_name', TRUE);
-            $data['region_headquater']=$this->input->post('region_headquater', TRUE);
+            $data['resident_county']=$this->input->post('resident_county', TRUE);
+			$data['incharge_name']=$this->input->post('incharge_name', TRUE);
+			$data['mobile_number']=$this->input->post('mobile_number', TRUE);
+			$data['email_of_contactperson']=$this->input->post('email_of_contactperson', TRUE);
                      
             return $data;
         }
@@ -82,7 +85,10 @@ function get_data_from_post(){
                $query = $this->get_where($update_id);
                foreach ($query->result() as $row){
                    $data['region_name'] = $row->region_name;
-                   $data['region_headquater'] = $row->region_headquater;
+                   $data['resident_county'] = $row->resident_county;
+				   $data['incharge_name'] = $row->incharge_name;
+				   $data['mobile_number'] = $row->mobile_number;
+				   $data['email_of_contactperson'] = $row->email_of_contactperson;
                    
                }
             return $data;
@@ -92,7 +98,10 @@ function get_data_from_post(){
             
         $this->load->library('form_validation');
         $this->form_validation->set_rules('region_name', 'region Name', 'required|xss_clean');
-        $this->form_validation->set_rules('region_headquater', 'region Headquater', 'required|xss_clean');
+        $this->form_validation->set_rules('resident_county', 'resident county', 'required|xss_clean');
+		$this->form_validation->set_rules('incharge_name', 'name of In-charge', 'required|xss_clean');
+		$this->form_validation->set_rules('mobile_number', 'mobile phone number', 'required|xss_clean');
+		$this->form_validation->set_rules('email_of_contactperson', 'email of contact person', 'required|xss_clean');
                         
         $update_id = $this->input->post('update_id', TRUE);
         if ($this->form_validation->run() == FALSE)

@@ -14,7 +14,10 @@
                                 <thead>
                                     <tr>
                                         <th>Region Name</th>
-                                        <th>Region Headquater</th>
+                                        <th>Resident County</th>
+										<th>Name of In-Charge</th>
+										<th>Mobile Phone Number</th>
+										<th>Email Address of Contact Person</th>
                                         <td align="center"><b>Edit</b></td>
                                         <td align="center"><b>Delete</b></td>
                                     </tr>
@@ -27,7 +30,10 @@
                                       ?>
                                     <tr>
                                         <td><?php echo $row->region_name ?></td>
-                                        <td><?php echo $row->region_headquater ?></td>
+                                        <td><?php echo $row->resident_county ?></td>
+										<td><?php echo $row->incharge_name ?></td>
+										<td><?php echo $row->mobile_number?></td>
+										<td><?php echo $row->email_of_contactperson ?></td>
                                         <td align="center"><a href="<?php echo $edit_url ?>"><i class="fa fa-edit"></i></a></td>
                                         <td align="center"><a href="<?php echo $delete_url ?>"><i class="fa fa-trash-o"></i></td>
                                        

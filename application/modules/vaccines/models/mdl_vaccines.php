@@ -14,7 +14,13 @@ function get_table() {
 
 function getVaccine(){
 		
-		$this->db->select('Vaccine_name, ID');
+        $call_procedure="CALL GetAllVaccines()";
+        $query=$this->db->query($call_procedure);
+        $query->next_result();
+        return $query->result_array();
+    }
+    function get_vaccine_details(){
+    	$this->db->select('Vaccine_name, Vaccine_formulation,Mode_administration');
         $query = $this->db->get('m_vaccines');
         return $query->result_array();
     }

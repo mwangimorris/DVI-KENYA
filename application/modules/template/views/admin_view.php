@@ -9,6 +9,11 @@
 <link href="<?php echo base_url() ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url() ?>assets/css/animate.css" rel="stylesheet" type="text/css" />
 <link href="<?php echo base_url() ?>assets/css/admin.css" rel="stylesheet" type="text/css" />
+<script src="<?php echo base_url();?>assets/js/jquery.min.js"></script>
+
+<script src="<?php echo base_url();?>assets/js/jquery-ui.min.js"></script>
+
+<link rel="stylesheet" href="<?php echo base_url();?>assets/css/jquery-ui.css">
 
 </head>
 <body class="light_theme  fixed_header left_nav_fixed">
@@ -19,7 +24,7 @@
     <div class="brand">
       <!--\\\\\\\ brand Start \\\\\\-->
       <div class="logo" style="display:block"><img src="<?php echo base_url() ?>assets/images/coat_of_arms.png" width="30" height="30" /><span class="theme_color">&nbsp;&nbsp;DVI</span> Kenya</div>
-      <div class="small_logo" style="display:none"><img src="<?php echo base_url() ?>assets/images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="<?php echo base_url() ?>assets/images/r-logo.png" width="122" height="20" alt="r-logo" /></div>
+     <!--  <div class="small_logo" style="display:none"><img src="<?php echo base_url() ?>assets/images/s-logo.png" width="50" height="47" alt="s-logo" /> <img src="<?php echo base_url() ?>assets/images/r-logo.png" width="122" height="20" alt="r-logo" /></div> -->
     </div>
     <!--\\\\\\\ brand end \\\\\\-->
     <div class="header_top_bar">
@@ -46,7 +51,7 @@
             <li> <a href="<?php //echo site_url('admin/user/profile');?>"><i class="fa fa-user"></i> Profile</a> </li>
             <li> <a href="#"><i class="fa fa-question-circle"></i> Help</a> </li>
             <li> <a href="#"><i class="fa fa-cog"></i> Setting </a></li>
-            <li> <a href="<?php echo site_url('auth/logout');?>"><i class="fa fa-power-off"></i> Logout</a> </li>
+            <li> <a href="<?php echo site_url('users/logout');?>"><i class="fa fa-power-off"></i> Logout</a> </li>
           </ul>
         </div>
         <!--<a href="javascript:;" class="toggle-menu menu-right push-body jPushMenuBtn rightbar-switch"><i class="fa fa-comment chat"></i></a>-->
@@ -70,44 +75,35 @@
               <li> <a href="#" class="left_nav_sub_active"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Dashboard</b> </a> </li>
             </ul>
           </li>
-
-           <li> <a href="javascript:void(0);"> <i class="fa fa-gear"></i>CONFIGURATIONS<span class="plus"><i class="fa fa-plus"></i></span> </a>
-            <ul>
-              <li> <a href="#"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Groups</b> </a> </li>
-              <li> <a href="#"> <span>&nbsp;</span> <i class="fa fa-circle"></i><b>Add Users</b> </a> </li>
-              <li> <a href="<?php echo site_url('vaccines');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Vaccines</b> </a> </li>
-              <li> <a href="<?php echo site_url('region/create');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Regions</b> </a> </li>
-              <li> <a href="<?php echo site_url('county/create');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add County</b> </a> </li>
-              <li> <a href="<?php echo site_url('subcounty/create');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Sub-County</b> </a> </li>
-              <li> <a href="<?php echo site_url('depot');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Depot</b> </a> </li>
-              <li> <a href="<?php echo site_url('facility');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Facilities</b> </a> </li>
-              <li> <a href="<?php echo site_url('fridge');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Fridges</b> </a> </li>
-            </ul>
-          </li>
-          <li> <a href="javascript:void(0);"> <i class="fa fa-cubes"></i>INVENTORY<span class="plus"><i class="fa fa-plus"></i></span></a>
-            <ul>
-              <li> <a href="<?php echo site_url('stock/physical_count');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Physical Count</b> </a> </li>
-              <li> <a href="<?php echo site_url('stock/vaccine_ledger');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Vaccines Ledger View</b> </a> </li>
-   
-              <li> <a href="<?php echo site_url('stock/receive_stock');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Receive Stocks</b> </a> </li>
-              <li> <a href="<?php echo site_url('stock/issue_stock');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Issue Stocks</b> </a> </li>
-              <li> <a href="<?php echo site_url('stock/transfer_stock');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Transfer Stocks</b> </a> </li>
-              <li> <a href="#"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Settings</b> </a> </li>
-            </ul>
-          </li>
-          <li> <a href="javascript:void(0);"> <i class="fa fa-th"></i>COLD CHAIN<span class="plus"><i class="fa fa-plus"></i></span> </a>
-            <ul>
-              <li> <a href="#"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Log Reports</b> </a> </li> 
-            </ul>
-          </li>
-
+<!-- 
            <li> <a href="javascript:void(0);"> <i class="fa fa-edit"></i>VACCINE ORDERS<span class="plus"><i class="fa fa-plus"></i></span></a>
             <ul>
               <li> <a href="<?php echo site_url("order/list_orders")?>" class="left_nav_sub_active"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Place/View Orders</b> </a> </li>
               <li> <a href="#" class="left_nav_sub_active"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Arrival Tracking</b> </a> </li>
               <li> <a href="#" class="left_nav_sub_active"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Search History</b> </a> </li>
             </ul>
+          </li> -->
+
+           <li> <a href="javascript:void(0);"> <i class="fa fa-cubes"></i>MANAGE STOCK<span class="plus"><i class="fa fa-plus"></i></span></a>
+            <ul>
+              <li> <a href="<?php echo site_url('stock/list_inventory');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Inventory</b> </a> </li>
+              <li> <a href="<?php echo site_url('stock/physical_count');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Physical Count</b> </a> </li>
+              <li> <a href="<?php echo site_url('stock/receive_stock');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Receive Stocks</b> </a> </li>
+              <li> <a href="<?php echo site_url('stock/issue_stock');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Issue Stocks</b> </a> </li>
+              <li> <a href="<?php echo site_url('stock/transfer_stock');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Transfer Stocks</b> </a> </li>
+              <li> <a href="<?php echo site_url("order/list_orders")?>" class="left_nav_sub_active"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Place/View Orders</b> </a> </li>
+              <li> <a href="#" class="left_nav_sub_active"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Arrival Tracking</b> </a> </li>
+              <li> <a href="#"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Settings</b> </a> </li>
+            </ul>
           </li>
+
+
+          <li> <a href="javascript:void(0);"> <i class="fa fa-th"></i>COLD CHAIN<span class="plus"><i class="fa fa-plus"></i></span> </a>
+            <ul>
+              <li> <a href="#"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Log Reports</b> </a> </li> 
+            </ul>
+          </li>
+
           
           
           <li> <a href="javascript:void(0);"> <i class="fa fa-bar-chart	"></i>REPORTS<span class="plus"><i class="fa fa-plus"></i></span> </a>
@@ -121,6 +117,19 @@
             <ul>
                   <li> <a href="#"> <span>&nbsp;</span> <i class="fa fa-circle"></i><b>Download Documents</b> </a> </li>
              </ul>
+          </li>
+          <li> <a href="javascript:void(0);"> <i class="fa fa-gear"></i>CONFIGURATIONS<span class="plus"><i class="fa fa-plus"></i></span> </a>
+            <ul>
+              <li> <a href="#"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Groups</b> </a> </li>
+              <li> <a href="#"> <span>&nbsp;</span> <i class="fa fa-circle"></i><b>Add Users</b> </a> </li>
+              <li> <a href="<?php echo site_url('vaccines');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Vaccines</b> </a> </li>
+              <li> <a href="<?php echo site_url('region/create');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Regions</b> </a> </li>
+              <li> <a href="<?php echo site_url('county/create');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add County</b> </a> </li>
+              <li> <a href="<?php echo site_url('subcounty/create');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Sub-County</b> </a> </li>
+              <li> <a href="<?php echo site_url('depot');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Depot</b> </a> </li>
+              <li> <a href="<?php echo site_url('facility');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Facilities</b> </a> </li>
+              <li> <a href="<?php echo site_url('refrigerator');?>"> <span>&nbsp;</span> <i class="fa fa-circle"></i> <b>Add Refrigerator</b> </a> </li>
+            </ul>
           </li>
         
            <li> <a href="javascript:void(0);"><img src="<?php echo base_url() ?>assets/images/coat_of_arms.png" width="30" height="30" /><span class="theme_color">&nbsp;&nbsp;<b>DVI KENYA</b></span> 	<span class="plus"><i class="fa fa-plus"></i></span> </a>

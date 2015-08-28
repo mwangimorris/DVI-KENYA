@@ -14,7 +14,21 @@
                                 <thead>
                                     <tr>
                                         <th>County Name</th>
-                                        <th>County Headquater</th>
+                                        <th>County Headquarter</th>
+										<th>Region</th>
+										<th>DHIS ID</th>
+										<th>County EPI Logistician</th>
+										<th>Mobile Number</th>
+										<th>Email Address</th>
+										<th>County Public Health Nurse</th>
+										<th>Mobile Phone Number</th>
+										<th>Email Address</th>
+										<th>Medical Engineering Technician</th>
+										<th>Mobile Phone Number</th>
+										<th>Email Address</th>
+										<th>County Medical Officer</th>
+										<th>Mobile Phone Number</th>
+										<th>Email Address</th>
                                         <td align="center"><b>Edit</b></td>
                                         <td align="center"><b>Delete</b></td>
                                     </tr>
@@ -27,8 +41,22 @@
                                       ?>
                                     <tr>
                                         <td><?php echo $row->county_name ?></td>
-                                        <td><?php echo $row->county_headquater ?></td>
-                                        <td align="center"><a href="<?php echo $edit_url ?>"><i class="fa fa-edit"></i></a></td>
+                                        <td><?php echo $row->county_headquarter ?></td>
+										<td><?php echo $row->region_id ?></td>
+										<td><?php echo $row->DHIS_ID ?></td>
+										<td><?php echo $row->county_logistician ?></td>
+										<td><?php echo $row->county_logistician_phone ?></td>
+										<td><?php echo $row->county_logistician_email ?></td>
+										<td><?php echo $row->county_nurse ?></td>
+										<td><?php echo $row->county_nurse_phone ?></td>
+										<td><?php echo $row->county_nurse_email ?></td>
+										<td><?php echo $row->medical_technician ?></td>
+										<td><?php echo $row->medical_technician_phone ?></td>
+										<td><?php echo $row->medical_technician_email ?></td>
+										<td><?php echo $row->county_medicalofficer ?></td>
+										<td><?php echo $row->county_medicalofficer_phone ?></td>
+										<td><?php echo $row->county_medicalofficer_email ?></td>
+										<td align="center"><a href="<?php echo $edit_url ?>"><i class="fa fa-edit"></i></a></td>
                                         <td align="center"><a href="<?php echo $delete_url ?>"><i class="fa fa-trash-o"></i></td>
                                        
                                     </tr>
