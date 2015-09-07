@@ -11,7 +11,7 @@
       //    $array = [
       //    $row-> => $row->county_name
       //];
-         $array[$row->region_name] = $row->region_name;
+         $array[$row->region_id] = $row->region_name;
         // $array[$row->region_id] = $row->id;
 
 }

@@ -1,51 +1,103 @@
 <?php
 $form_attributes = array('id' => 'vaccine_ledger');
 echo form_open('',$form_attributes);?>
+
 <table>
-<p class="bg-info"> Vaccine Ledger</p>
 	<thead>
-	     <th style="width:50%;" class="small" align="center">Vaccine/Diluent</th>
+	<p class="bg-info"> Vaccines</p>
+		<th style="width:50%;" class="small" align="center">Vaccine/Diluents</th>
+							
 	</thead>
 	<tbody>
-		 <td> <select name="vaccine" class="vaccine" id="vaccine">
+		
+		<td> <select name="v_list" class="col-xs-11 v_list" id="v_list">
                  <option value="">--Select One--</option>
                  <?php foreach ($vaccines as $vaccine) { 
                      echo "<option value='".$vaccine['ID']."'>".$vaccine['Vaccine_name']."</option>";
                      }?>
                 </select></td>
+             		
 	</tbody>
- </table>
-							
-
-<table class="table">
+</table>
+						
+<table class="table" id="v_ledger_tbl">
 
 <hr></hr><hr></hr>
 	<thead>
+	<p class="bg-info"> Vaccine Ledger</p>
 		<th style="width:12%;" class="small">Vaccines/Diluents (Origin/Destination)</th>
-							<th style="width:12%;" class="small">Count</th>
-							<th style="width:12%;" class="small">Received</th>
-							<th style="width:12%;" class="small">Issued</th>
+		                    <th style="width:12%" class="small">Batch Number</th>
+							<th style="width:12%;" class="small">Transaction Date</th>
+							<th style="width:12%;" class="small"> Stock Received </th>
+							<th style="width:12%;" class="small">Stock Issued</th>
 							<th style="width:12%;" class="small">Store Balance</th>
-							<th style="width:12%;" class="small">Voucher Number</th>
-							<th style="width:12%" class="small">Batch Number</th>
 							<th style="width:12%" class="small">Expiry Date</th>
 							<th style="width:10%" class="small">VVM Status</th>
 	</thead>
 	<tbody>
-		<tr align="center">
+	<?php foreach ($ledgers as $ledger) { ?>
+
+		<tr align="center" ledger_row="1">
 				
-             	    <td><?php $data=array('name' => 'vaccine','id'=> 'vaccine','class'=>'col-xs-11 vaccine'); echo form_input($data);?></td>
-             		<td><?php $data=array('name' => 'count','id'=>'count','class'=>'col-xs-9 count'); echo form_input($data);?></td>
-             		<td><?php $data=array('name' => 'received','id'=> 'received','class'=>'col-xs-11 received'); echo form_input($data);?></td>
-             		<td><?php $data=array('name' => 'issued','id'=> 'issued','class'=>'col-xs-10 issued'); echo form_input($data);?></td>
-             		<td><?php $data=array('name' => 'store_bal','id'=> 'store_bal','class'=>'col-xs-9 store_bal'); echo form_input($data);?></td>
-             		<td><?php $data=array('name' => 'voucher_number','id'=> 'voucher_number','class'=>'col-xs-8 voucher_number'); echo form_input($data);?></td>
-             		<td><?php $data=array('name' => 'batch_number','id'=> 'batch_number','class'=>'col-xs-7 batch_number'); echo form_input($data);?></td>
-             		<td><?php $data=array('name' => 'expiry_date','id'=> 'expiry_date','class'=>'col-xs-9 expiry_date'); echo form_input($data);?></td>
-             		<td><?php $data=array('name' => 'vvm_status','id'=> 'vvm_status','class'=>'col-xs-8 vvm_status'); echo form_input($data);?></td>
+             	    
+             	    <td><?php echo $ledger['Vaccine_name']?></td>
+             	    <td><?php echo $ledger['batch_number']?></td>
+             	    <td><?php echo $ledger['transaction_date']?></td>
+             	    <td><?php echo $ledger['quantity_in']?></td>
+             	    <td><?php echo $ledger['quantity_out']?></td>
+             	    <td><?php echo $ledger['stock_balance']?></td>
+             	    <td><?php echo $ledger['expiry_date']?></td>
+             	    <td><?php echo $ledger['name']?></td>
              		
 			</tr>
+			<?php } ?>
 	</tbody>
 </table>
 
 <?php echo form_close();?>
+
+<script type="text/javascript">
+$('#v_ledger_tbl > tbody  > tr').each(function(key,value) {
+/*console.log(value);
+celval= value.cells;
+console.log(celval);*/
+var cellLength= value.cells.length;
+console.log(cellLength);
+for(var y=0; y<cellLength; y+=1){
+    var cell = value.cells[y];
+    console.log(cell);
+
+
+    //do something with every cell here
+  }
+});
+	
+	$(document).on( 'change','#v_list', function () {
+		   var selected_vaccine=$(this).val();
+		   get_ledger(selected_vaccine);
+		});
+
+			function get_ledger(selected_vaccine){
+				var _url="<?php echo base_url();?>stock/get_vaccine_ledger/"+ selected_vaccine;
+				   var request=$.ajax({
+						     url: _url,
+						     type: 'post',
+						    });
+				   request.done(function(data){
+			    	data=JSON.parse(data);
+			    	console.log(data);
+			    	$.each(data,function(key,value){
+			    		console.log(value);
+			    		/*alert($("table td:gt(0)").length);*/
+			    		
+			    		/*console.log(value.Vaccine_name);*/
+	                  /* $('#myDiv table table td').eq(0).text('Picked');*/
+			    		
+			    	});
+			    });
+			    request.fail(function(jqXHR, textStatus) {
+				  
+				});
+			   
+			}
+</script>

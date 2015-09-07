@@ -63,12 +63,5 @@ $data=array('name' => 'stock_transfer','id'=> 'stock_transfer','value' => 'Trans
    
    echo form_close();?>
    <script type="text/javascript">
-       $("#date_transferred").datepicker({
-					changeMonth : true,
-					changeYear : true,
-			});
-       $("#expiry_date").datepicker({
-					changeMonth : true,
-					changeYear : true,
-			});
+ 
    </script>

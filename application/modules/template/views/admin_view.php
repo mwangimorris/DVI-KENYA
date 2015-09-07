@@ -189,7 +189,8 @@ aria-hidden="true">&times;</span></button>
 <script src="<?php echo base_url() ?>assets/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url() ?>assets/js/common-script.js"></script>
 <script src="<?php echo base_url() ?>assets/js/jquery.slimscroll.min.js"></script>
-<script src="<?php echo base_url() ?>assets/js/jPushMenu.js"></script> 
+<script src="<?php echo base_url() ?>assets/js/jPushMenu.js"></script>
+<script src="<?php echo base_url() ?>assets/plugins/validation/parsley.min.js"></script> 
 <!--<script src="js/side-chats.js"></script>-->
 
 </body>

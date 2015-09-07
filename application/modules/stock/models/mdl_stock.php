@@ -21,14 +21,23 @@ class Mdl_Stock extends CI_Model
 		 return $query->result_array();
 	}
 	function get_batchdetails($selected_batch){
-		$this->db->select('expiry_date,stock_balance');
+		$this->db->select('expiry_date,stock_balance,mv.name');
+		$this->db->join('m_vvm_status mv', 'mv.id = vvm_status', 'left');
 		$array = array('batch_number' => $selected_batch, 'stock_balance !=' => '0');
         $this->db->where($array);
-		$query = $this->db->get('m_stock_balance');
+		$query = $this->db->get('m_stock_balance ');
 		 return $query->result_array();
+	
 	}
-	function get_vaccine_details(){
-		
+	function get_vaccine_ledger($selected_vaccine){
+		$call_procedure="CALL GetVaccinesLedger($selected_vaccine)";
+        $query=$this->db->query($call_procedure);
+        $query->next_result();
+        return $query->result_array();
+	}
+	function set_physical_count($data,$count){
+		$this->db->where($data);
+        $this->db->update('m_stock_movement', $count);
 	}
 	
 

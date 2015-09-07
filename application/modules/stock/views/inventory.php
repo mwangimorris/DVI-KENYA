@@ -1,4 +1,4 @@
-
+ <?php echo $this->session->flashdata('msg');  ?>
 <table class="table" id="inventory">
         <thead>
                 
@@ -10,14 +10,14 @@
 
         <tbody>
 
-             <?php foreach ($vaccines as $vaccine) { ?>
+             <?php foreach ($vaccines as $vaccine) {
+              $ledger_url = base_url().'stock/get_vaccine_ledger/'.$vaccine['ID'];
+              ?>
               <tr>
-             
-              <td><?php echo $vaccine['Vaccine_name']?></td>
-              <td><?php echo $vaccine['Vaccine_formulation']?></td>
-              <td><?php echo $vaccine['Mode_administration']?></td> 
-              <td><a id= "v_ledger" class="small v_ledger" href="<?php echo site_url('stock/vaccine_ledger')?>">view vaccine ledger</a></td>
-              
+                    <td><?php echo $vaccine['Vaccine_name']?></td>
+                    <td><?php echo $vaccine['Vaccine_formulation']?></td>
+                    <td><?php echo $vaccine['Mode_administration']?></td>  
+                    <td align="center"><a href="<?php echo $ledger_url ?>"> view vaccine ledger</a></td>
               </tr>
                <?php }?>
 
@@ -27,25 +27,9 @@
 
         <script type="text/javascript">
 
-            $(".v_ledger").click(function(e){
-              var _url="<?php echo base_url();?>stock/";
-            
-                      var request=$.ajax({
-                         url: _url,
-                         type: 'post',
-                         data: {"selected_batch":selected_batch},
-
-                        });
-                        request.done(function(data){
-                          data=JSON.parse(data);
-                          console.log(data);
-                          
-                          $.each(data,function(key,value){
-                            
-                          });
-                        });
-                        request.fail(function(jqXHR, textStatus) {
-                        
-                      });
-            });
-        </script>
+               window.setTimeout(function() {
+                  $("#alert-message").fadeTo(500, 0).slideUp(500, function(){
+                      $(this).remove(); 
+                  });
+              }, 2000);
+        </script> 

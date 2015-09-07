@@ -4,43 +4,52 @@ class Users extends MX_Controller
 function __construct() {
 parent::__construct();
 $this->load->model('mdl_users');
+
 }
 
 function index(){
-    $this->login();
-}
-
-function logout(){
-    redirect(base_url());
+    //echo "heeelo";
+    $data['module']="users";
+    $data['view_file']="login_form";
+    echo Modules::run('template/home', $data); 
 }
 
 function _logged_in_ok($username){
 
     $query = $this->get_where_custom('username', $username);
     foreach ($query->result() as $row) {
-        $user_id = $row->id;
-        $user_fname = $row->f_name;
-        $user_lname = $row->l_name;
-        $user_email = $row->email;
-        $user_group= $row->user_group;
+       $userdata = array(
+        'user_id' => $row->id,
+        'user_fname' => $row->f_name,
+        'user_lname' => $row->l_name,
+        'user_email' => $row->email,
+        'user_group'=> $row->user_group,
+        'logged_in'=>TRUE
+        );
     }
 
-   /*$userdata = array(
-                    'email' =>$userdetails->email_address,
-                    'f_name'=>$userdetails->f_name,
-                    'l_name'=>$userdetails->l_name,
-                    'is_logged_in' => TRUE
-                    );*/
-
-   $this->session->set_userdata('user_id', $user_id);
-//echo "hello".$user_id.$user_email.$user_fname.$user_lname.$user_group;
-redirect('county');
+$this->session->set_userdata($userdata);
+// echo "<pre>";
+// echo "hello ".var_dump($userdata);
+redirect('dashboard/home');
 }
 
+function logout(){
+//$logged_in = $this->session->userdata('logged_in');
+$this->session->unset_userdata('logged_in');
+$this->session->unset_userdata('user_id');
+$this->session->unset_userdata('user_fname');
+$this->session->unset_userdata('user_lname');
+$this->session->unset_userdata('user_email');
+$this->session->unset_userdata('user_group');
+$this->session->sess_destroy();
+redirect('/','refresh');  
+//redirect('dashboard/home');
 
+}
 
 function create_user(){
-	
+	Modules::run('secure_tings/ni_admin');
 	$data= $this->get_register_data_from_post();
 	$data['module']="users";
     $data['view_file']="register_form";
@@ -94,13 +103,7 @@ function get_register_data_from_post(){
         }
     }
 
-function login(){
-	//$data= $this->get_login_data_from_post();
 
-	$data['module']="users";
-    $data['view_file']="login_form";
-    echo Modules::run('template/home', $data); 
-}
     
 function submit() {
 
@@ -113,7 +116,7 @@ function submit() {
 
         if ($this->form_validation->run($this) == FALSE)
         {
-            $this->login();
+            $this->index();
         }
         else
         {

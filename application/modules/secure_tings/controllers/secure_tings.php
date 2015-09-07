@@ -19,12 +19,57 @@ function kuchocha($password){
 
 }
 
-function ni_admin(){
-$user_id = $this->session->userdata('user_id');
-if (!is_numeric($user_id)){
-redirect(base_url());	
+function is_logged_in(){
+$logged_in = $this->session->userdata('logged_in');
+$user_group = $this->session->userdata('user_group');
+if ($logged_in==FALSE){
+redirect(users);	
+}
 }
 
+function ni_admin(){
+$this->is_logged_in();	
+$user_group = $this->session->userdata('user_group');
+if (!$user_group=='1'){
+echo "no priviledges by the way";	
+}
+}
+
+
+function ni_national_user(){
+$this->is_logged_in();	
+$user_group = $this->session->userdata('user_group');
+if (!$user_group=='2'){
+echo "no priviledges by the way";	
+}
+}
+function ni_regional_user(){
+$this->is_logged_in();	
+$user_group = $this->session->userdata('user_group');
+if (!$user_group=='3'){
+echo "no priviledges by the way";	
+}
+}
+function ni_county_user(){
+$this->is_logged_in();	
+$user_group = $this->session->userdata('user_group');
+if (!$user_group=='4'){
+echo "no priviledges by the way";	
+}
+}
+function ni_subcounty_user(){
+$this->is_logged_in();	
+$user_group = $this->session->userdata('user_group');
+if (!$user_group=='5'){
+echo "no priviledges by the way";	
+}
+}
+function ni_managers(){
+$this->is_logged_in();	
+$user_group = $this->session->userdata('user_group');
+if (!$user_group=='9'){
+echo "no priviledges by the way";	
+}
 }
 
 

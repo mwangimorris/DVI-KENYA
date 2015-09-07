@@ -6,12 +6,14 @@ echo form_open('',$form_attributes);?>
 <p class="bg-info"> Transaction Details</p>
 	<thead>
 		                  <th style="width:50%;" class="small" align="center">Received From</th>
-							<th style="width:50%;" class="small">Date Issued</th>
+							<th style="width:40%;" class="small">Date Received</th>
+              <th></th>
 	</thead>
 	<tbody>
 		<tr>
                 <td><?php $data=array('name' => 'received_from','id'=> 'received_from','class'=>'col-xs-20'); echo form_input($data);?></td>
-                <td><?php $data=array('name' => 'date_received','id'=>'date_received','class'=>'col-xs-11','type'=>'date'); echo form_input($data);?></td>
+                <td><?php $data=array('name' => 'date_received','id'=>'date_received','class'=>'col-xs-11'); echo form_input($data);?></td>
+                <td><input type="hidden" name ="transaction_type" class="transaction_type" value="1"><td>
 		</tr>
 	</tbody>
 </table>
@@ -24,8 +26,8 @@ echo form_open('',$form_attributes);?>
 		<thead>
 
 			              <th style="width:26%;" class="small" align="center">Vaccine/Diluents</th>
-							<th style="width:12%;" class="small">Batch No.</th>
-							<th style="width:16%;" class="small">Expiry&nbsp;Date</th>
+							<th style="width:20%;" class="small">Batch No.</th>
+							<th style="width:6%;" class="small">Expiry&nbsp;Date</th>
 							<th style="width:12%;" class="small">Quantity(doses)</th>
 							<th style="width:16%;" class="small">VVM Status</th>
 							<th style="width:15%" class="small">Action</th>
@@ -33,20 +35,21 @@ echo form_open('',$form_attributes);?>
 		<tbody>
 
 			<tr align="center" receive_row="1"> 
-              <input type="hidden" name ="transaction_type" class="transaction_type" value="1">
-              <td> <select name="vaccine" class="vaccine" id="vaccine">
+              
+              <td> <select name="vaccine" class="vaccine col-xs-12" id="vaccine">
                  <option value="">--Select One--</option>
                  <?php foreach ($vaccines as $vaccine) { 
                      echo "<option value='".$vaccine['ID']."'>".$vaccine['Vaccine_name']."</option>";
                      }?>
                 </select></td>
+
 				
-             		<td><?php $data=array('name' => 'batch_no','id'=>'batch_no','class'=>'batch_no col-xs-9'); echo form_input($data);?></td>
-             		<td><?php $data=array('name' => 'expiry_date','id'=> 'expiry_date','class'=>'col-xs-11 expiry_date', 'type'=>'date'); echo form_input($data);?></td>
-             		<td><?php $data=array('name' => 'quantity_received','id'=> 'quantity_received','class'=>'quantity_received col-xs-12'); echo form_input($data);?></td>
+             		<td><?php $data=array('name' => 'batch_no','id'=>'batch_no','class'=>'batch_no col-xs-12'); echo form_input($data);?></td>
+             		<td><?php $data=array('name' => 'expiry_date','id'=> 'expiry_date','class'=>'col-xs-15 expiry_date', 'type'=>'date'); echo form_input($data);?></td>
+             		<td><?php $data=array('name' => 'quantity_received','id'=> 'quantity_received','class'=>'quantity_received col-xs-14'); echo form_input($data);?></td>
              		
                 <td>
-                <select name="vvm_status" class="vvm_status" id="vvm_status" name="vvm_status">
+                <select name="vvm_status" class="vvm_status col-xs-15" id="vvm_status" name="vvm_status">
                 <option value=""> --Select One-- </option>
                     <option value="1">Stage 1</option>
                     <option value="2">Stage 2</option>
@@ -65,6 +68,8 @@ echo form_open('',$form_attributes);?>
    echo form_close();?>
 
    <script type="text/javascript">
+
+             $('#date_received').datepicker().datepicker('setDate', new Date());
 
               $('#stock_receive_tbl').delegate( '.add', 'click', function () {
             
@@ -141,10 +146,14 @@ echo form_open('',$form_attributes);?>
               type: "POST",
               data : {"transaction_type":get_transaction_type,"date_received":get_date_received,"received_from":get_received_from,"vaccine":get_vaccine,"batch_no":get_batch,"expiry_date":get_expiry,"quantity_received":get_quantity_received,"vvm_status":get_vvm_status},
              /* dataType : json,*/
-             url : "<?php echo site_url("stock/list_inventory"); ?>";
+            // url : "<?php echo site_url("stock/list_inventory"); ?>";
               success:function(data, textStatus, jqXHR) 
               {
                   //data: return data from server
+                  
+                  window.location.replace('<?php echo base_url().'stock/list_inventory'?>');
+
+
 
               },
               error: function(jqXHR, textStatus, errorThrown) 

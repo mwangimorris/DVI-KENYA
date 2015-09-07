@@ -15,8 +15,10 @@ function get_orders(){
 	$query = $this->db->get('order');
 	return $query->result_array();
 }
-function get_orderitems(){
-	$query = $this->db->get('order_item');
+function get_orderitems($order_id){
+	$query = $this->db->get_where('order_item', array('order_id' => $order_id));
+/*	$query = $this->db->get('order_item');*/
+	
 	return $query->result_array();
 }
 

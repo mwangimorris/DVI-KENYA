@@ -20,7 +20,7 @@ function getVaccine(){
         return $query->result_array();
     }
     function get_vaccine_details(){
-    	$this->db->select('Vaccine_name, Vaccine_formulation,Mode_administration');
+    	$this->db->select('ID,Vaccine_name, Vaccine_formulation,Mode_administration');
         $query = $this->db->get('m_vaccines');
         return $query->result_array();
     }

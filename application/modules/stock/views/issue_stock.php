@@ -5,13 +5,15 @@ echo form_open('',$form_attributes);?>
 <p class="bg-info"> Transaction Details</p>
 	<thead>
 		                  <th style="width:50%;" class="small" align="center">Issue To</th>
-							<th style="width:50%;" class="small">Date Issued</th>
+							<th style="width:40%;" class="small">Date Issued</th>
+							<th></th>
 
 	</thead>
 	<tbody>
 		<tr>
-			<td><?php $data=array('name' => 'issued_to','id'=> 'issued_to','class'=>'col-xs-20'); echo form_input($data);?></td>
-             		<td><?php $data=array('name' => 'date_issued','id'=>'date_issued','class'=>'col-xs-11','type'=>'date'); echo form_input($data);?></td>
+			<td><?php $data=array('name' => 'issued_to','id'=> 'issued_to','class'=>'col-xs-20 issued_to'); echo form_input($data);?></td>
+             		<td><?php $data=array('name' => 'date_issued','id'=>'date_issued','class'=>'col-xs-11 date_issued','type'=>'date'); echo form_input($data);?></td>
+             		<input type="hidden" name ="transaction_type" class="transaction_type" value="2">
 		</tr>
 	</tbody>
 </table>
@@ -26,16 +28,17 @@ echo form_open('',$form_attributes);?>
 
 			                <th style="width:17%;" class="small" align="center">Vaccine/Diluents</th>
 							<th style="width:14%;" class="small">Batch No.</th>
-							<th style="width:2%;" class="small">Expiry&nbsp;Date</th>
+							<th style="width:14%;" class="small">Expiry&nbsp;Date</th>
 							<th style="width:12%;" class="small">Amount Ordered</th>
 							<th style="width:12%;" class="small">Available quantity</th>
 							<th style="width:12%;" class="small">Amount Issued</th>
-							<th style="width:19%;" class="small">VVM Status</th>
-							<th style="width:11%" class="small">Action</th>
+							<th style="width:12%;" class="small">VVM Status</th>
+							<th style="width:14%" class="small">Action</th>
 		</thead>
 		<tbody>
 
 			<tr align="center" issue_row="1">
+			
 			<td> <select name="vaccine" class="col-xs-11 vaccine" id="vaccine">
                  <option value="">--Select One--</option>
                  <?php foreach ($vaccines as $vaccine) { 
@@ -51,17 +54,11 @@ echo form_open('',$form_attributes);?>
                  background-color: #E0F2F7 !important
                  }</style>
              		
-             		<td><?php $data=array('name' => 'expiry_date','id'=> 'expiry_date','class'=>'col-xs-11 expiry_date', 'type'=>'date'); echo form_input($data);?></td>
+             		<td><?php $data=array('name' => 'expiry_date','id'=> 'expiry_date','class'=>'col-xs-12 expiry_date','readonly'=>''); echo form_input($data);?></td>
              		<td><?php $data=array('name' => 'amt_ordered','id'=> 'amt_ordered','class'=>'col-xs-12 amt_ordered'); echo form_input($data);?></td>
              		<td><?php $data=array('name' => 'available_quantity','id'=> 'available_quantity','class'=>'col-xs-12 available_quantity','readonly'=>''); echo form_input($data);?></td>
              		<td><?php $data=array('name' => 'amt_issued','id'=> 'amt_issued','class'=>'col-xs-12 amt_issued'); echo form_input($data);?></td>
-             		<td>
-             		<select name="vvm_status" class="vvm_s col-xs-11">
-             		<option value=""> --Select One-- </option>
-                    <option value="1">Stage 1</option>
-                    <option value="2">Stage 2</option>
-                    <option value="3">Stage 3</option>
-                </select></td>
+                    <td><?php $data=array('name' => 'vvm_status','id'=> 'vvm_status','class'=>'col-xs-11 vvm_s','readonly'=>''); echo form_input($data);?></td>
              	
              		<td class="col-xs-9 small "><a href="#" class="add"> Add </a><span class="divider"> | </span><a href="#" class="remove">Remove</a></td>
 
@@ -84,8 +81,8 @@ echo form_open('',$form_attributes);?>
  
 // Add another row in the form on click add
 
-           $('#stock_issue').delegate( '.add', 'click', function () {
-           	
+           $(document).on( 'click','#stock_issue .add', function () {
+
              var thisRow =$('#stock_issue tr:last');
               var cloned_object = $( thisRow ).clone();
 
@@ -126,41 +123,7 @@ echo form_open('',$form_attributes);?>
              $(this).closest('tr').remove();});
 
 
-           //This function loops the whole form and saves all the input, select, e.t.c. elements with their corresponding values in a javascript array for processing
-
-           function retrieveFormValues() {
-		
-		  var dump = Array;
-				$.each($("input, select, textarea"), function(i, v) {
-					var theTag = v.tagName;
-					var theElement = $(v);
-					var theValue = theElement.val();
-					if(theElement.attr('type') == "radio") {
-						var text = 'input:radio[name=' + theElement.attr('name') + ']:checked';
-						dump[theElement.attr("name")] = $(text).attr("value");
-					} else {
-						dump[theElement.attr("name")] = theElement.attr("value");
-					}
-				});
-		return dump;
-	}
-	
-	function retrieveFormValues_Array(name) {
-		var dump = new Array();
-		var counter = 0;
-			$.each($("input[name=" + name + "], select[name=" + name + "]"), function(i, v) {
-					var theTag = v.tagName;
-					var theElement = $(v);
-					var theValue = theElement.val();
-					/*dump[counter] = theElement.attr("value");*/
-					dump[counter] = theValue;
-
-					counter++;
-			});
-		return dump;
-	}
-
-
+          
 
 	 $("#issuestock_fm").submit(function(e)
          {
@@ -179,8 +142,9 @@ echo form_open('',$form_attributes);?>
 		   var amt_ordered = retrieveFormValues_Array('amt_ordered');
 		   var amt_issued = retrieveFormValues_Array('amt_issued');
 		   var vvm_status = retrieveFormValues_Array('vvm_status');
-		   var date_issued = retrieveFormValues();
-		   var issued_to= retrieveFormValues();
+		   var date_issued = retrieveFormValues('date_issued');
+		   var issued_to= retrieveFormValues('issued_to');
+		   var transaction_type= retrieveFormValues('transaction_type');
 
 
 
@@ -191,15 +155,19 @@ echo form_open('',$form_attributes);?>
 		   		var get_amt_ordered=amt_ordered[i];
 		   		var get_amt_issued=amt_issued[i];
 		   		var get_vvm_status=vvm_status[i];
+		   		var get_date_issued=date_issued;
+                var get_issued_to=issued_to;
+                var get_transaction_type=transaction_type;
 
 			    $.ajax(
 			    {
 			        url : formURL,
 			        type: "POST",
-			        data : {"vaccine":get_vaccine,"batch_no":get_batch,"expiry_date":get_expiry,"amt_ordered":get_amt_ordered,"amt_issued":get_amt_issued,"vvm_status":get_vvm_status},
+			        data : {"transaction_type":get_transaction_type,"date_issued":get_date_issued,"issued_to":get_issued_to,"vaccine":get_vaccine,"batch_no":get_batch,"expiry_date":get_expiry,"amt_issued":get_amt_issued,"vvm_status":get_vvm_status},
 			       /* dataType : json,*/
 			        success:function(data, textStatus, jqXHR) 
 			        {
+			        	window.location.replace('<?php echo base_url().'stock/list_inventory'?>');
 			            //data: return data from server
 			        },
 			        error: function(jqXHR, textStatus, errorThrown) 
@@ -211,9 +179,11 @@ echo form_open('',$form_attributes);?>
 		   // e.unbind(); //unbind. to stop multiple form submit.
            });
 
-		$("#vaccine").change(function(){
+		$(document).on( 'change','.vaccine', function () {
 			var stock_row=$(this);
-		   var selected_vaccine=$(this).val();
+		 /*  var selected_vaccine=$(this).val();*/
+		   var selected_vaccine=stock_row.val();
+		   // alert(selected_vaccine);
 		   load_batches(selected_vaccine,stock_row);
 		});
 
@@ -233,6 +203,7 @@ echo form_open('',$form_attributes);?>
 			    	stock_row.closest("tr").find(".batch_no option").remove();
 			    	stock_row.closest("tr").find(".expiry_date ").val("");
 			    	stock_row.closest("tr").find(".available_quantity").val("");
+			    	stock_row.closest("tr").find(".vvm_s").val("");
 			    	stock_row.closest("tr").find(".batch_no ").append("<option value='0'>Select batch </option> ");
 			    	$.each(data,function(key,value){
 			    		stock_row.closest("tr").find(".batch_no").append("<option value='"+value.batch_number+"'>"+value.batch_number+"</option> ");
@@ -247,18 +218,20 @@ echo form_open('',$form_attributes);?>
 				});
 		}
 		
-		$(".batch_no").change(function(){
+		
+			$(document).on( 'change','.batch_no', function () {
 			var stock_row=$(this);
 		   var selected_batch=$(this).val();
 		   batch_details(selected_batch,stock_row);
 		});
+
 		function batch_details(selected_batch,stock_row){
 			var _url="<?php echo base_url();?>stock/get_batch_details";
 						
 				var request=$.ajax({
-			     url: _url,
-			     type: 'post',
-			     data: {"selected_batch":selected_batch},
+					     url: _url,
+					     type: 'post',
+					     data: {"selected_batch":selected_batch},
 
 			    });
 			    request.done(function(data){
@@ -266,12 +239,11 @@ echo form_open('',$form_attributes);?>
 			    	console.log(data);
 			    	stock_row.closest("tr").find(".expiry_date ").val("");
 			    	stock_row.closest("tr").find(".available_quantity").val("");
+			    	stock_row.closest("tr").find(".vvm_s").val("");
 			    	$.each(data,function(key,value){
 			    		stock_row.closest("tr").find(".expiry_date").val(value.expiry_date);
 			    		stock_row.closest("tr").find(".available_quantity").val(value.stock_balance);
-
-			    		
-			    		/*value[0].batch_number;*/
+			    		stock_row.closest("tr").find(".vvm_s").val(value.name);
 			    		
 			    	});
 			    });
@@ -279,6 +251,36 @@ echo form_open('',$form_attributes);?>
 				  
 				});
 		}
+
+		 //This function loops the whole form and saves all the input, select, e.t.c. elements with their corresponding values in a javascript array for processing
+
+           function retrieveFormValues(name) {
+                      var dump;
+                        $.each($("input[name=" + name + "], select[name=" + name + "]"), function(i, v) {
+                            var theTag = v.tagName;
+                            var theElement = $(v);
+                            var theValue = theElement.val();
+                            dump = theValue;
+                        });
+                      return dump;
+            }
+	
+	        function retrieveFormValues_Array(name) {
+								var dump = new Array();
+								var counter = 0;
+									$.each($("input[name=" + name + "], select[name=" + name + "]"), function(i, v) {
+											var theTag = v.tagName;
+											var theElement = $(v);
+											var theValue = theElement.val();
+											/*dump[counter] = theElement.attr("value");*/
+											dump[counter] = theValue;
+
+											counter++;
+									});
+								return dump;
+				}
+
+
 
 
    </script>

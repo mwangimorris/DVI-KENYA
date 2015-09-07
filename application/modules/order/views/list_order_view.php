@@ -13,13 +13,15 @@
 
         <tbody>
 
-        <?php foreach ($orders as $order) { ?>
+        <?php foreach ($orders as $order) { 
+          $ledger_url = base_url().'order/view_orders/'.$order['order_id'];?>
+
               <tr>
               <td><?php echo $order['order_id']?></td>
               <td><?php echo $order['order_by']?></td>
               <td><?php echo $order['date_created']?></td>
               <td style="color:red">Pending</td>
-              <td><a href="<?php echo site_url('order/view_orders')?>">View</a><span class="divider"> | </span><a href="#">Receive</a></td>
+              <td><a href="<?php echo $ledger_url ?>">View</a><span class="divider"> | </span><a href="<?php echo site_url('stock/receive_stock');?>">Receive</a></td>
         <?php }?>
               </tr>
 
