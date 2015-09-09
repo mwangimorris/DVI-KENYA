@@ -21,7 +21,7 @@
               <td><?php echo $order['order_by']?></td>
               <td><?php echo $order['date_created']?></td>
               <td style="color:red">Pending</td>
-              <td><a href="<?php echo $ledger_url ?>">View</a><span class="divider"> | </span><a href="<?php echo site_url('stock/receive_stock');?>">Receive</a></td>
+              <td><a href="<?php echo $ledger_url ?>">View</a><span class="divider"> | </span><a href="#">Download</a></td>
         <?php }?>
               </tr>
 
