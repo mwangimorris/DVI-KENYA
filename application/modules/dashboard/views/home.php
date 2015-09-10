@@ -1,6 +1,8 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 
 <div class="row">
+
+  BVVVVVVVVVVVVVVVVVVMMBBBBB
           <div class="col-md-12">
          <div class="custom-bar-chart">
             <ul class="y-axis">
