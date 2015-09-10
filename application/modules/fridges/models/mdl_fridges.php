@@ -1,50 +1,32 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Mdl_users extends CI_Model {
+class Mdl_fridges extends CI_Model {
 
 function __construct() {
 parent::__construct();
 }
 
 function get_table() {
-    $table = "m_users";
-    return $table;
+$table = "m_fridges";
+return $table;
 }
 
-function password_check($username, $password) {
-$table = $this->get_table();
-$this->db->where('username', $username);
-$this->db->where('password', $password);
-$query=$this->db->get($table);
-$num_rows = $query->num_rows();
-
-if($num_rows>0){
-  return TRUE;
-} else {
-  return FALSE;
-}
-return $num_rows;
-}
-
-
-
-function get_user_groups(){
-
-$this->db->select('id,name');
-$query = $this->db->get('m_group');
+function getRefrigerator(){
+$this->db->select("id, Model, Manufacturer");
+$this->db->from("m_fridges");
+$query = $this->db->get();
 return $query->result();
 }
 
-function get_email(){
-    $email = $this->input->post('email');
-   	$sql = "SELECT email FROM m_users WHERE email = '{$email}'"; 
-   	$query1 = $this->db->query($sql);
-   	$result = $query1->result();
-   	return $result;
+function get_all($id){
+$this->db->select('*');
+$this->db->from('m_facility');
+$this->db->where('region_id', $id);
+$this->db->join('m_region', 'm_region.region_name = m_facility.region_id');
+$query = $this->db->get();
+return $query->result_array();
 }
-
-
 
 
 function get($order_by){
@@ -52,6 +34,14 @@ $table = $this->get_table();
 $this->db->order_by($order_by);
 $query=$this->db->get($table);
 return $query;
+}
+
+function getn($order_by){
+$table = $this->get_table();
+$this->db->order_by($order_by);
+$query=$this->db->get($table);
+$num_rows = $query->num_rows();
+return $num_rows;
 }
 
 function get_with_limit($limit, $offset, $order_by) {

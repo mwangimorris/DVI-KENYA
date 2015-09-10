@@ -48,25 +48,30 @@ parent::__construct();
             $data = array();
             $this->load->model('mdl_facility');
             
+
+            
+
 		if (!isset($update_id )){
 			$update_id = $this->input->post('update_id', $id);
 			$data['region']  = $this->mdl_facility->getRegion();
 			$data['county']  = $this->mdl_facility->getCounty();
 			$data['subcounty']  = $this->mdl_facility->getSubcounty();
-			
+			$data['fridge'] = $this->getRefrigerator();
 		}
-            
+			
 		if (is_numeric($update_id)){
 			$data = $this->get_data_from_db($update_id);
 			$data['update_id'] = $update_id;
 			$data['region']  = $this->mdl_facility->getRegion();
 			$data['county']  = $this->mdl_facility->getCounty();
 			$data['subcounty']  = $this->mdl_facility->getSubcounty();
+			$data['fridge'] = $this->getRefrigerator();
 		} else {
 			$data= $this->get_data_from_post();
 			$data['region']  = $this->mdl_facility->getRegion();
 			$data['county']  = $this->mdl_facility->getCounty();
 			$data['subcounty']  = $this->mdl_facility->getSubcounty();
+			$data['fridge'] = $this->getRefrigerator();
 			
 		}
         
@@ -78,6 +83,17 @@ parent::__construct();
 		echo Modules::run('template/admin', $data);
 	}
 
+	function getRefrigerator(){
+		$this->load->model('fridges/mdl_fridges');
+		$query = $this->mdl_fridges->getRefrigerator();
+		//var_dump($query);
+		/*foreach ($query->result() as $row){
+			$data['Model']= $row->Model;
+			$data['Manufacturer']= $row->Manufacturer;
+		}
+		return $data;*/
+		return $query;
+	}
 	function delete($id){
 		$this->_delete($id);
 		$this->session->set_flashdata('msg', '<div id="alert-message" class="alert alert-success text-center">Facility deleted successfully!</div>');
@@ -85,10 +101,7 @@ parent::__construct();
 	}		
 	function get_data_from_db($update_id){
 		$query = $this->get_where($update_id);
-		// $region_query = $this->get_region();
-		// foreach ($region_query->result() as $row){
-		  // $data['region_query'] = $row->region_name;
-		// }
+
 		foreach ($query->result() as $row){
 		  $data['facility_name'] = $row->facility_name;
 		  $data['type'] = $row->type;
@@ -101,9 +114,9 @@ parent::__construct();
 		  $data['nearest_town'] = $row->nearest_town;
 		  $data['nearest_town_distance'] = $row->nearest_town_distance;
 		  $data['nearest_depot_distance'] = $row->nearest_depot_distance;
-		  $data['wcba_pop'] = $row->wcba_pop;
-		  $data['pop'] = $row->pop;
-		  $data['pop_under_one'] = $row->pop_under_one;
+		  $data['wcba_population'] = $row->wcba_population;
+		  $data['catchment_population'] = $row->catchment_population;
+		  $data['catchment_population_under_one'] = $row->catchment_population_under_one;
 		  $data['refrigerator'] = $row->refrigerator;
 		  $data['cold_box'] = $row->cold_box;
 		  $data['vaccine_carrier'] = $row->vaccine_carrier;
@@ -123,9 +136,9 @@ parent::__construct();
 		$data['nearest_town'] 	= $this->input->post('nearest_town', TRUE);
 		$data['nearest_town_distance'] 	= $this->input->post('nearest_town_distance', TRUE);
 		$data['nearest_depot_distance'] = $this->input->post('nearest_depot_distance', TRUE);
-		$data['wcba_pop'] 				= $this->input->post('wcba_pop', TRUE);
-		$data['pop'] 					= $this->input->post('pop', TRUE);
-		$data['pop_under_one'] 			= $this->input->post('pop_under_one', TRUE);		
+		$data['wcba_population'] 		= $this->input->post('wcba_population', TRUE);
+		$data['catchment_population'] 	= $this->input->post('catchment_population', TRUE);
+		$data['catchment_population_under_one'] = $this->input->post('catchment_population_under_one', TRUE);		
 		$data['refrigerator']			= $this->input->post('refrigerator', TRUE);
 		$data['cold_box'] 				= $this->input->post('cold_box', TRUE);
 		$data['vaccine_carrier']		= $this->input->post('vaccine_carrier', TRUE);

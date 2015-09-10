@@ -12,17 +12,24 @@ function get_table() {
     return $table;
 }
 
+
+
 function getRegion(){
-$query = $this->db->query("SELECT id, region_name FROM m_region");
+$this->db->select('id, region_name');
+$query = $this->db->get('m_region');
 return $query->result();
 }
 
 function getCounty(){
-$query = $this->db->query("SELECT id, county_name FROM m_county");
+$this->db->select('id, county_name');
+$query = $this->db->get('m_county');
 return $query->result();
 }
+
+
 function getSubcounty(){
-$query = $this->db->query("SELECT id, subcounty_name FROM m_subcounty");
+$this->db->select('id, subcounty_name');
+$query = $this->db->get('m_subcounty');
 return $query->result();
 }
 

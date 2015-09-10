@@ -12,6 +12,10 @@
 	foreach($subcounty as $row ){
 		$subcounty_array[$row->id] = $row->subcounty_name;
 	}
+	$fridge_array = array();
+	foreach($fridge as $row ){
+		$fridge_array[$row->id] = $row->Model;
+	}
 	$array = array(
 		'Yes' => 'Yes',
 		'No' => 'No'
@@ -104,7 +108,7 @@
 				</div>
 
 				<div class="form-group">
-					<span class="next btn btn-lg btn-info pull-right" data-current-block="1" data-next-block="2">Next ></span>
+					<span class="next btn btn-lg btn-danger pull-right" data-current-block="1" data-next-block="2">Next ></span>
 				</div>
 			</div><!--End of First Block-->
 
@@ -159,7 +163,7 @@
 				</div>
 				
 				<div class="form-group">
-					<span class="next btn btn-lg btn-info pull-right" data-current-block="2" data-next-block="3">Next ></span>
+					<span class="next btn btn-lg btn-danger pull-right" data-current-block="2" data-next-block="3">Next ></span>
 				</div>
 				
 			</div>	<!--End of Second Block-->
@@ -194,23 +198,23 @@
 					<?php
 					echo form_label('WCBA Population (15-49)','wcba_pop');
 					echo form_error('wcba_pop');
-					echo form_input(['name' => 'wcba_pop', 'id' => 'wcba_pop',  'value' =>  $wcba_pop, 'class' => 'form-control']);
+					echo form_input(['name' => 'wcba_pop', 'id' => 'wcba_pop',  'value' =>  $wcba_population, 'class' => 'form-control']);
 					?>
 				</div>	
 				
 				<div class="form-group">
 					<?php
-					echo form_label('Total Catchment Population','pop');
-					echo form_error('pop');
-					echo form_input(['name' => 'pop', 'id' => 'pop',  'value' =>  $pop, 'class' => 'form-control']);
+					echo form_label('Total Catchment Population','catchment_population');
+					echo form_error('catchment_population');
+					echo form_input(['name' => 'catchment_population', 'id' => 'catchment_population',  'value' =>  $catchment_population, 'class' => 'form-control']);
 					?>
 				</div>	
 				  
 				<div class="form-group">
 					<?php
-					echo form_label('Catchment Population (Under 1 yr)','pop_under_one');
-					echo form_error('pop_under_one');
-					echo form_input(['name' => 'pop_under_one', 'id' => 'pop_under_one',  'value' =>  $pop_under_one, 'class' => 'form-control']);
+					echo form_label('Catchment Population (Under 1 yr)','catchment_population_under_one');
+					echo form_error('catchment_population_under_one');
+					echo form_input(['name' => 'catchment_population_under_one', 'id' => 'catchment_population_under_one',  'value' =>  $catchment_population_under_one, 'class' => 'form-control']);
 					?>
 				</div>
 				
@@ -224,9 +228,16 @@
 				  
 				<div class="form-group">
 					<?php		
-					echo form_label('Fridge','fridge');
-					echo form_error('fridge');	    
-					echo form_dropdown('fridge',$array , 'Yes', 'class="form-control"');
+					echo form_label('Refrigerator','refrigerator');
+					echo form_error('refrigerator');	    
+					echo form_dropdown('refrigerator',$array , 'No', 'class="form-control" id="refrigerator"');
+					?>
+				</div>
+				<div class="form-group hidden" id="refrigerator_make">
+					<?php		
+					echo form_label('Refrigerator Make','refrigerator_id');
+					echo form_error('refrigerator_id');	    
+					echo form_dropdown('refrigerator_id',$fridge_array , '', 'class="form-control"');
 					?>
 				</div>           
 				  
@@ -255,9 +266,9 @@
 				</div>
 
 				<div class="form-group">
-					<span class="next btn btn-lg btn-info pull-left" data-current-block="3" data-next-block="2">< Previous</span>
+					<span class="next btn btn-lg btn-danger pull-left" data-current-block="3" data-next-block="2"> Previous</span>
 					<div class="col-sm-offset-2 col-sm-6">
-					<?php echo form_submit('submit', 'Create Facility', 'class="btn btn-lg btn-danger pull-right"');
+					<?php echo form_submit('submit', 'Create Facility', 'class="btn btn-lg btn-danger pull-right " id="submit"');
 										 if (isset($update_id)){
 											  echo form_hidden('update_id', $update_id);
 										  }
@@ -270,6 +281,15 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
+
+  var submit = document.getElementById("submit");
+  
+  function display(){
+    	$('#submit').addClass('disabled');
+  }
+
+  window.onload = display;
+
   $('.next').on('click', function () {
     var current = $(this).data('currentBlock'),
       next = $(this).data('nextBlock');
@@ -288,7 +308,35 @@ $(document).ready(function () {
       .addClass('show');
 
   });
+
+  $('#refrigerator').change(function(){
+  	var refrigerator = $('#refrigerator').val();
+  	
+  	
+
+  	if(refrigerator=="Yes"){
+  		$('#refrigerator_make')
+      .removeClass('hidden')
+      .addClass('show');
+
+      	$('#submit')
+      	 .removeClass('disabled');
+      console.log(refrigerator);
+	  }else if(refrigerator=="No"){
+	  	$('#refrigerator_make')
+      .removeClass('show')
+      .addClass('hidden');
+  		console.log('No');
+
+  		$('#submit')
+      	 .addClass('disabled');
+	  }
+  
+  });
+
 });
+
+
 </script>			
 		</div>
 	</div>

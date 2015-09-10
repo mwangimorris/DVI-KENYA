@@ -1,8 +1,20 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
-  <div class="panel-heading border login_heading">REGISTER USER</div> 
-      
+   <div class="row">
+       <div class="col-lg-4 col-lg-offset-4">
+      <?php echo $this->session->flashdata('msg');  ?>
       <?php echo validation_errors('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><b>',' </b></div>');?>
  <?php echo form_open('users/register');?>
+   
+<?php  
+$group = array();
+  foreach($magroups as $row ){
+    $group[$row->id] = $row->name;
+    
+  }
+
+?>
+
+
    <div class="form-group">
         <?php
         echo form_label('Enter First Name','f_name');
@@ -49,7 +61,8 @@
         <?php
         echo form_label('Enter User Group','user_group');
         echo form_error('user_group');
-        echo form_input(['name' => 'user_group', 'id' => 'user_group',  'value' => $user_group ,'class' => 'form-control', 'placeholder' => 'Enter User Group ID']);
+        //echo form_input(['name' => 'user_group', 'id' => 'user_group',  'value' => $user_group ,'class' => 'form-control', 'placeholder' => 'Enter User Group ID']);
+       echo form_dropdown('user_group', $group, $user_group, 'id="user_group" class="form-control"'); 
         ?>
       </div>
      <div class="form-group">
@@ -69,3 +82,4 @@
       
       <button class="btn btn-lg btn-danger btn-block" name="submit" type="submit">REGISTER</button>
     <?php echo form_close();?>
+</div></div>

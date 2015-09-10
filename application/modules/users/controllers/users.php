@@ -51,10 +51,15 @@ redirect('/','refresh');
 function create_user(){
 	Modules::run('secure_tings/ni_admin');
 	$data= $this->get_register_data_from_post();
+    $data['magroups']  = $this->mdl_users->get_user_groups();
+    $data['section'] = "DVI Kenya";
+    $data['subtitle'] = "Users";
+    $data['page_title'] = "Add New Users";
 	$data['module']="users";
     $data['view_file']="register_form";
-    echo Modules::run('template/home', $data); 
+    echo Modules::run('template/admin', $data); 
 }
+
 
 function get_register_data_from_post(){
             $data['f_name']=$this->input->post('f_name', TRUE);
@@ -90,15 +95,15 @@ function get_register_data_from_post(){
         else
         {       
                    $data= $this->get_register_data_from_post();
-                    $password = $this->input->post('password', TRUE);
+                $password = $this->input->post('password', TRUE);
                     $data['password'] = Modules::run('secure_tings/hash_it', $password);
 
                     //$data['password']=md5($this->input->post('password', TRUE));
             		//$data['passwordc']=$this->input->post('passwordc', TRUE);
                    $this->_insert($data);
-                       $this->session->set_flashdata('msg', '<div id="alert-message" class="alert alert-success text-center">You have Successfully Registered to DVI System Kenya. Login to get Started</div>');
+                       $this->session->set_flashdata('msg', '<div id="alert-message" class="alert alert-success text-center">User Added Successfuly</div>');
                    //$this->session->set_flashdata('success', 'County added successfully.');
-                   redirect('users');
+                   redirect('users/create_user', 'refresh');
         
         }
     }

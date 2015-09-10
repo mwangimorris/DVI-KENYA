@@ -34,7 +34,7 @@ public function index()
             $data['records'] = $this->db->get('m_depot', $config['per_page'], $this->uri->segment(3));
             $data['section'] = "Configuration";
             $data['subtitle'] = "Depot";
-            $data['page_title'] = "List depots";
+            $data['page_title'] = "List Depots";
             $data['module']="depot";
             $data['view_file']="list_depot_view";
             echo Modules::run('template/admin', $data);  
@@ -51,43 +51,38 @@ function create(){
             
             if (!isset($update_id )){
                 $update_id = $this->input->post('update_id', $id);
-        				$data['region']  = $this->mdl_depot->getRegion();
-        				$data['county']  = $this->mdl_depot->getCounty();
-      				  $data['subcounty']  = $this->mdl_depot->getSubcounty();
-              }
+				$data['region']  = $this->mdl_depot->getRegion();
+				$data['county']  = $this->mdl_depot->getCounty();
+				$data['subcounty']  = $this->mdl_depot->getSubcounty();
+            }
             
             if (is_numeric($update_id)){
                 $data = $this->get_data_from_db($update_id);
                 $data['update_id'] = $update_id;
-        				$data['region']  = $this->mdl_depot->getRegion();
-        				$data['county']  = $this->mdl_depot->getCounty();
-        				$data['subcounty']  = $this->mdl_depot->getSubcounty();				
+				$data['region']  = $this->mdl_depot->getRegion();
+				$data['county']  = $this->mdl_depot->getCounty();
+				$data['subcounty']  = $this->mdl_depot->getSubcounty();				
                 
-              } else {
-        				$data= $this->get_data_from_post();
-        				$data['region']  = $this->mdl_depot->getRegion();
-        				$data['county']  = $this->mdl_depot->getCounty();
-        				$data['subcounty']  = $this->mdl_depot->getSubcounty();			
-             }
+            } else {
+				$data= $this->get_data_from_post();
+				$data['region']  = $this->mdl_depot->getRegion();
+				$data['county']  = $this->mdl_depot->getCounty();
+				$data['subcounty']  = $this->mdl_depot->getSubcounty();			
+            }
             
-          $data['section'] = "Configuration";
-          $data['subtitle'] = "depots";
-          $data['page_title'] = "Add depots";
-        	$data['module'] = "depot";
-        	$data['view_file'] = "create_depot_form";
-        	echo Modules::run('template/admin', $data);
-        }
+            $data['section'] = "Configuration";
+            $data['subtitle'] = "Depots";
+            $data['page_title'] = "Add Depot";
+	$data['module'] = "depot";
+	$data['view_file'] = "create_depot_form";
+	echo Modules::run('template/admin', $data);
+}
 
 function get_data_from_post(){
-      $data['depot_name']=$this->input->post('depot_name', TRUE);
-      $data['depot_level']=$this->input->post('depot_level', TRUE);
+            $data['depot_location']=$this->input->post('depot_location', TRUE);
 			$data['region_id']=$this->input->post('region_id', TRUE);
 			$data['county_id']=$this->input->post('county_id', TRUE);
-      $data['subcounty_id']=$this->input->post('subcounty_id', TRUE);
-      $data['officer_incharge']=$this->input->post('officer_incharge', TRUE);
-      $data['email']=$this->input->post('email', TRUE);
-      $data['phone']=$this->input->post('phone', TRUE);
-			$data['elec_status']=$this->input->post('elec_status', TRUE);
+			$data['subcounty_id']=$this->input->post('subcounty_id', TRUE);
 			        
             return $data;
         }
@@ -95,15 +90,10 @@ function get_data_from_post(){
         function get_data_from_db($update_id){
                $query = $this->get_where($update_id);
                foreach ($query->result() as $row){
-                  $data['depot_name'] = $row->depot_name;
-                  $data['depot_level'] = $row->depot_level;
-                  $data['region_id'] = $row->region_id;
-                  $data['county_id'] = $row->county_id;
-                  $data['subcounty_id'] = $row->subcounty_id;
-                  $data['officer_incharge'] = $row->officer_incharge;
-                  $data['email'] = $row->email;
-                  $data['phone'] = $row->phone;
-				          $data['elec_status'] = $row->elec_status;
+                   $data['depot_location'] = $row->depot_location;
+                   $data['region_id'] = $row->region_id;
+                   $data['county_id'] = $row->county_id;
+				   $data['subcounty_id'] = $row->subcounty_id;
                }
             return $data;
         }
@@ -111,15 +101,10 @@ function get_data_from_post(){
           function submit (){
             
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('depot_name', 'Depot Name', 'required|xss_clean');
-        $this->form_validation->set_rules('depot_level', 'Depot Level', 'required|xss_clean');
+        $this->form_validation->set_rules('depot_location', 'Depot Name', 'required|xss_clean');
         $this->form_validation->set_rules('region_id', 'Region', 'required|xss_clean');
         $this->form_validation->set_rules('county_id', 'County', 'required|xss_clean');
         $this->form_validation->set_rules('subcounty_id', 'Subcounty', 'required|xss_clean');
-        $this->form_validation->set_rules('officer_incharge', 'Name of Officer In-charge', '|required|min_length[5]|max_length[30]|xss_clean');
-        $this->form_validation->set_rules('email', 'Email Address', 'required|valid_email|xss_clean');
-        $this->form_validation->set_rules('phone', 'Phone Number', 'required|numeric');
-        $this->form_validation->set_rules('elec_status', 'Electrification Status', 'required|xss_clean');
        
         $update_id = $this->input->post('update_id', TRUE);
         if ($this->form_validation->run() == FALSE)

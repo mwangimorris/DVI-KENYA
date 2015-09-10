@@ -1,47 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Mdl_users extends CI_Model {
+class Mdl_group extends CI_Model {
 
 function __construct() {
 parent::__construct();
 }
 
 function get_table() {
-    $table = "m_users";
+    $table = "m_group";
     return $table;
-}
-
-function password_check($username, $password) {
-$table = $this->get_table();
-$this->db->where('username', $username);
-$this->db->where('password', $password);
-$query=$this->db->get($table);
-$num_rows = $query->num_rows();
-
-if($num_rows>0){
-  return TRUE;
-} else {
-  return FALSE;
-}
-return $num_rows;
-}
-
-
-
-function get_user_groups(){
-
-$this->db->select('id,name');
-$query = $this->db->get('m_group');
-return $query->result();
-}
-
-function get_email(){
-    $email = $this->input->post('email');
-   	$sql = "SELECT email FROM m_users WHERE email = '{$email}'"; 
-   	$query1 = $this->db->query($sql);
-   	$result = $query1->result();
-   	return $result;
 }
 
 

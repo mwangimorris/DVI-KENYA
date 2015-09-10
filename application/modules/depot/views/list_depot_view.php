@@ -13,14 +13,10 @@
   <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Depot Name</th>
+                                        <th>Depot Depot </th>
                                         <th>Depot Region </th>
                                         <th>Depot County</th>
                                         <th>Depot Sub-County </th>
-                                        <th>Officer Incharge </th>
-                                        <th>Email Address</th>
-                                        <th>Phone Number</th>
-                                        <th>Electrification Status </th>
                                         <td align="center"><b>Edit</b></td>
                                         <td align="center"><b>Delete</b></td>
                                     </tr>
@@ -32,14 +28,10 @@
                                         $delete_url = base_url().'depot/delete/'.$row->id;
                                       ?>
                                     <tr>
-                                        <td><?php echo $row->depot_name ?></td>
+                                        <td><?php echo $row->depot_location ?></td>
                                         <td><?php echo $row->region_id ?></td>
                                         <td><?php echo $row->county_id ?></td>
                                         <td><?php echo $row->subcounty_id ?></td>
-                                        <td><?php echo $row->officer_incharge ?></td>
-                                        <td><?php echo $row->email ?></td>
-                                        <td><?php echo $row->phone ?></td>
-                                        <td><?php echo $row->elec_status ?></td>
                                         <td align="center"><a href="<?php echo $edit_url ?>"><i class="fa fa-edit"></i></a></td>
                                         <td align="center"><a href="<?php echo $delete_url ?>"><i class="fa fa-trash-o"></i></td>
                                        

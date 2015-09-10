@@ -4,6 +4,7 @@ class County extends MX_Controller
 
 function __construct() {
 parent::__construct();
+
 }
 
 public function index()
@@ -42,9 +43,6 @@ public function index()
             echo Modules::run('template/admin', $data);  
 	}
    
-
-
-
 function create(){
 	
             $update_id= $this->uri->segment(3);
@@ -76,50 +74,17 @@ function create(){
 
 function get_data_from_post(){
             $data['county_name']=$this->input->post('county_name', TRUE);
-            $data['county_headquarter']=$this->input->post('county_headquarter', TRUE);
-            $data['region_id']=$this->input->post('region_id', TRUE);
-			$data['DHIS_ID']=$this->input->post('DHIS_ID', TRUE);
-            $data['county_logistician']=$this->input->post('county_logistician', TRUE);
-			$data['county_logistician_phone']=$this->input->post('county_logistician_phone', TRUE);
-			$data['county_logistician_email']=$this->input->post('county_logistician_email', TRUE);
-			$data['county_nurse']=$this->input->post('county_nurse', TRUE);
-			$data['county_nurse_phone']=$this->input->post('county_nurse_phone', TRUE);
-			$data['county_nurse_email']=$this->input->post('county_nurse_email', TRUE);
-			$data['medical_technician']=$this->input->post('medical_technician', TRUE);
-			$data['medical_technician_phone']=$this->input->post('medical_technician_phone', TRUE);
-			$data['medical_technician_email']=$this->input->post('medical_technician_email', TRUE);
-			$data['county_medicalofficer']=$this->input->post('county_medicalofficer', TRUE);
-			$data['county_medicalofficer_phone']=$this->input->post('county_medicalofficer_phone', TRUE);
-			$data['county_medicalofficer_email']=$this->input->post('county_medicalofficer_email', TRUE);
-			
-			return $data;
+            $data['county_headquater']=$this->input->post('county_headquater', TRUE);
+            $data['region_id']=$this->input->post('region_id', TRUE);          
+            return $data;
         }
 
         function get_data_from_db($update_id){
                $query = $this->get_where($update_id);
                foreach ($query->result() as $row){
                    $data['county_name'] = $row->county_name;
-				   $data['region_id'] = $row->region_id;
-                   $data['county_headquarter'] = $row->county_headquarter;
-                   $data['DHIS_ID'] = $row->DHIS_ID;
-				   $data['county_logistician'] = $row->county_logistician;
-				   $data['county_logistician_phone'] = $row->county_logistician_phone;
-				   $data['county_logistician_email'] = $row->county_logistician_email;
-				   $data['county_nurse'] = $row->county_nurse;
-				   $data['county_nurse_phone'] = $row->county_nurse_phone;
-				   $data['county_nurse_email'] = $row->county_nurse_email;
-				   $data['medical_technician'] = $row->medical_technician;
-				   $data['medical_technician_phone'] = $row->medical_technician_phone;
-				   $data['medical_technician_email'] = $row->medical_technician_email;
-				   $data['county_medicalofficer'] = $row->county_medicalofficer;
-				   $data['county_medicalofficer_phone'] = $row->county_medicalofficer_phone;
-				   $data['county_medicalofficer_email'] = $row->county_medicalofficer_email;
-				   
-				   
-				   
-				   
-				   
-				  					
+                   $data['county_headquater'] = $row->county_headquater;
+                   $data['region_id'] = $row->region_id;
                }
             return $data;
         }
@@ -128,24 +93,8 @@ function get_data_from_post(){
             
         $this->load->library('form_validation');
         $this->form_validation->set_rules('county_name', 'County Name', 'required|xss_clean');
-        $this->form_validation->set_rules('county_headquarter', 'County Headquarter', 'required|xss_clean');
+        $this->form_validation->set_rules('county_headquater', 'County Headquater', 'required|xss_clean');
         $this->form_validation->set_rules('region_id', 'Region', 'required|xss_clean');
-		$this->form_validation->set_rules('DHIS_ID', 'DHIS ID', 'required|xss_clean');
-		$this->form_validation->set_rules('county_logistician', 'County EPI Logistician', 'required|xss_clean');
-		$this->form_validation->set_rules('county_logistician_phone', 'Mobile Number of EPI Logistician', 'required|xss_clean');
-		$this->form_validation->set_rules('county_logistician_email', 'Email Address of EPI Logistician', 'required|xss_clean');
-		$this->form_validation->set_rules('county_nurse', 'County Public Health Nurse', 'required|xss_clean');
-		$this->form_validation->set_rules('county_nurse_phone', 'Mobile Phone Number of County Public Health Nurse', 'required|xss_clean');
-		$this->form_validation->set_rules('county_nurse_email', 'Email Address of County Public Health Nurse', 'required|xss_clean');
-		$this->form_validation->set_rules('medical_technician', 'Medical Engineering Technician', 'required|xss_clean');
-		$this->form_validation->set_rules('medical_technician_phone', 'Mobile Phone Number of Medical Engineering Technician', 'required|xss_clean');
-		$this->form_validation->set_rules('medical_technician_email', 'Email Address of Medical Engineering Technician', 'required|xss_clean');
-		$this->form_validation->set_rules('county_medicalofficer', 'County Medical Officer', 'required|xss_clean');
-		$this->form_validation->set_rules('county_medicalofficer_phone', 'Mobile Phone Number of County Medical Officer', 'required|xss_clean');
-		$this->form_validation->set_rules('county_medicalofficer_email', 'Email Address County Medical Officer', 'required|xss_clean');
-		
-
-		 					
                 
         $update_id = $this->input->post('update_id', TRUE);
         if ($this->form_validation->run() == FALSE)

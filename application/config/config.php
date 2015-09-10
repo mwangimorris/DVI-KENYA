@@ -16,7 +16,7 @@
 | environments.
 |
 */
-$config['base_url'] = 'http://localhost/DVIHMVC/';
+$config['base_url'] = 'http://localhost:8080/DVI/';
 
 /*
 |--------------------------------------------------------------------------

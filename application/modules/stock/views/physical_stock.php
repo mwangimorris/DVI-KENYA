@@ -2,14 +2,14 @@
 $form_attributes = array('id' => 'physical_stock_fm');
 echo form_open('',$form_attributes);?>
 <div id="physical_stock">
-<table class="table">
+<table class="table table-bordered">
 	<thead>
-		<th style="width:12%;" class="small" align="center">Vaccine Name</th>
-							<th style="width:9%;" class="small">Batch Number</th>
-							<th style="width:15%;" class="small">Expiry Date</th>
-							<th style="width:16%;" class="small">Available Quantity</th>
-							<th style="width:15%;" class="small"> Physical Count</th>
-							<th style="width:12%;" class="small">Action</th>
+		<th align="center">Vaccine Name</th>
+							<th >Batch Number</th>
+							<th >Expiry Date</th>
+							<th >Available Quantity</th>
+							<th > Physical Count</th>
+							<th>Action</th>
 							
 							
 	</thead>
@@ -39,7 +39,8 @@ echo form_open('',$form_attributes);?>
 	</tbody>
 </table>
 </div>
-<input type="submit" name="physical_count_fm" id="physical_count_fm" value="Register Physical Count">
+
+<button type="submit" name="physical_count_fm" id="physical_count_fm" class="btn btn-lg btn-danger">Register Physical Count</button>
 
 <?php echo form_close();?>
 

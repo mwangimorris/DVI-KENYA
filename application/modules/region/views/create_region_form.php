@@ -13,38 +13,11 @@
       </div>
      <div class="form-group">
         <?php
-        echo form_label('Resident County','resident_county');
-        echo form_error('resident_county');
-        echo form_input(['name' => 'resident_county', 'id' => 'resident_county',  'value' => $resident_county ,'class' => 'form-control', 'placeholder' => 'Enter Resident County']);
+        echo form_label('Region Headquater','region_headquater');
+        echo form_error('region_headquater');
+        echo form_input(['name' => 'region_headquater', 'id' => 'region',  'value' => $region_headquater ,'class' => 'form-control', 'placeholder' => 'Enter region Name']);
         ?>
       </div>
-	  
-	  <div class="form-group">
-        <?php
-        echo form_label('Name of In-Charge','incharge_name');
-        echo form_error('incharge_name');
-        echo form_input(['name' => 'incharge_name', 'id' => 'region',  'value' => $incharge_name ,'class' => 'form-control', 'placeholder' => 'Enter Name of In-Charge']);
-        ?>
-      </div>
-	  
-	  <div class="form-group">
-        <?php
-        echo form_label('Mobile Phone Number','mobile_number');
-        echo form_error('mobile_number');
-        echo form_input(['name' => 'mobile_number', 'id' => 'region',  'value' => $mobile_number ,'class' => 'form-control', 'placeholder' => 'Enter Mobile Phone Number']);
-        ?>
-      </div>
-	  
-	  <div class="form-group">
-        <?php
-        echo form_label('Email Address of Contact Person','email_of_contactperson');
-        echo form_error('email_of_contactperson');
-        echo form_input(['name' => 'email_of_contactperson', 'id' => 'region',  'value' => $email_of_contactperson ,'class' => 'form-control', 'placeholder' => 'Enter Email Address of Contact Person']);
-        ?>
-      </div>
-	  
-	  
-	  
       <div >
       <button class="btn btn-lg btn-danger btn-block" name="submit" type="submit">Create Region</button>
       </div>
